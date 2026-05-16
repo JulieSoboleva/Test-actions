@@ -59,6 +59,7 @@ jobs:
             set -e
             IMAGE="${{ env.REGISTRY }}/$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]'):latest"
             CONTAINER_NAME="time-api"
+            HOST_PORT=8080
 
             echo "${{ secrets.GHCR_TOKEN }}" | docker login ${{ env.REGISTRY }} -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
 
@@ -70,7 +71,7 @@ jobs:
             docker run -d \
               --name "$CONTAINER_NAME" \
               --restart unless-stopped \
-              -p 8000:8000 \
+              -p ${HOST_PORT}:8000 \
               "$IMAGE"
 
             docker image prune -f
