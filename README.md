@@ -30,6 +30,7 @@ uvicorn main:app --reload
 |-------|--------|-----------------------------------|
 | GET   | `/`    | Проверка, что сервер работает     |
 | GET   | `/time`| Текущее время в UTC и локальной TZ|
+| GET   | `/date`| Текущая дата в UTC и локальной TZ |
 | GET   | `/docs`| Swagger UI (автоматически)        |
 
 ### Пример ответа `GET /time`
@@ -42,6 +43,21 @@ uvicorn main:app --reload
   },
   "local": {
     "server_time": "2026-05-16T15:00:00.123456+03:00",
+    "timezone": "RTZ 2 (зима)"
+  }
+}
+```
+
+### Пример ответа `GET /date`
+
+```json
+{
+  "utc": {
+    "server_date": "2026-05-16",
+    "timezone": "UTC"
+  },
+  "local": {
+    "server_date": "2026-05-16",
     "timezone": "RTZ 2 (зима)"
   }
 }

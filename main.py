@@ -25,3 +25,20 @@ def get_time():
             "timezone": str(now_local.tzinfo),
         },
     }
+
+
+@app.get("/date")
+def get_date():
+    now_utc = datetime.now(timezone.utc)
+    now_local = datetime.now().astimezone()
+
+    return {
+        "utc": {
+            "server_date": now_utc.date().isoformat(),
+            "timezone": "UTC",
+        },
+        "local": {
+            "server_date": now_local.date().isoformat(),
+            "timezone": str(now_local.tzinfo),
+        },
+    }
